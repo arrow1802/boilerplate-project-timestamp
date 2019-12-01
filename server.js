@@ -25,8 +25,12 @@ app.get("/api/hello", function (req, res) {
 });
 app.get("/api/timestamp/:date_string?", function (req, res) {
   console.log(req.params)  //{"unix":1451001600000,"utc":"Fri, 25 Dec 2015 00:00:00 GMT"}
-  let date= req.params.
-  res.json(req.params);
+  let date= req.params.date_string
+  // date = new Date(date)
+  date = new Date(date*1)  //{"unix":1450137600000,"utc":"Tue, 15 Dec 2015 00:00:00 GMT"}
+  let utc = date.toUTCString()
+  let unix = date.getTime()
+  res.json({unix:unix,utc:utc});
 });
 
 
