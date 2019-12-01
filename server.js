@@ -24,9 +24,14 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 app.get("/api/timestamp/:date_string?", function (req, res) {
-   
-  let value= req.params.date_string != undefined ? req.params.date_string : new Date().toISOString().slice(0,10)
-  console.
+  let value= ''
+  if (value.search('-') > 0){
+  value= req.params.date_string != undefined ? req.params.date_string : new Date().toISOString().slice(0,10)  
+  }else if (value.search('-') < 0){
+  value= req.params.date_string != undefined ? req.params.date_string : new Date().toISOString().slice(0,10)    
+  }
+  
+  console.log(value.search('-'))
   // value = new Date(value) != "Invalid Date" ? value : 
   let date = new Date(value)    //{"unix":1451001600000,"utc":"Fri, 25 Dec 2015 00:00:00 GMT"}
   // date = new Date(date*1)  //{"unix":1450137600000,"utc":"Tue, 15 Dec 2015 00:00:00 GMT"}
