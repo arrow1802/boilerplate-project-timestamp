@@ -29,8 +29,9 @@ app.get("/api/timestamp/:date_string?", function (req, res) {
   let date = new Date(value)    //{"unix":1451001600000,"utc":"Fri, 25 Dec 2015 00:00:00 GMT"}
   // date = new Date(date*1)  //{"unix":1450137600000,"utc":"Tue, 15 Dec 2015 00:00:00 GMT"}
   console.log("params :", req.params.date_string,"  value :",new Date().toISOString().slice(0,10)) 
-  let utc = value.toUTCString()
-  let unix = value.getTime()
+  let utc = date.toUTCString()
+  let unix = date.getTime()
+  console.log("convert :",value , value.toString())
   res.json({unix:unix,utc:utc});
 });
 
