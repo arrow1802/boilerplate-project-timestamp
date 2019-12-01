@@ -24,10 +24,11 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 app.get("/api/timestamp/:date_string?", function (req, res) {
-  console.log(req.params)  //{"unix":1451001600000,"utc":"Fri, 25 Dec 2015 00:00:00 GMT"}
-  let date= req.params.date_string
-  // date = new Date(date)
-  date = new Date(date*1)  //{"unix":1450137600000,"utc":"Tue, 15 Dec 2015 00:00:00 GMT"}
+   
+  let value= req.params.date_string != undefined ? req.params.date_string : new Date().format()
+  let date = new Date(value)    //{"unix":1451001600000,"utc":"Fri, 25 Dec 2015 00:00:00 GMT"}
+  // date = new Date(date*1)  //{"unix":1450137600000,"utc":"Tue, 15 Dec 2015 00:00:00 GMT"}
+  console.log("params :", req.params.date_string,"  value :",value) 
   let utc = date.toUTCString()
   let unix = date.getTime()
   res.json({unix:unix,utc:utc});
