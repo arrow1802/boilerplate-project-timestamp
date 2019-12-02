@@ -27,10 +27,12 @@ app.get("/api/timestamp/:date_string?", function (req, res) {
   let userInput = req.params.date_string
   if (userInput == undefined){
     
-    let value = new Date().toISOString().slice(0,10)
+    // let value = new Date().toISOString().slice(0,10)
+    let value = new Date()
     let date = new Date(value)
     let utc = date.toUTCString()
     let unix = date.getTime()
+    // res.json({unix:unix,utc:utc,type:"undefined"});
     res.json({unix:unix,utc:utc});
     
   }else if (Number.parseInt(userInput) == userInput){
@@ -39,16 +41,25 @@ app.get("/api/timestamp/:date_string?", function (req, res) {
     let date = new Date(value)
     let utc = date.toUTCString()
     let unix = date.getTime()
+    // res.json({unix:unix,utc:utc,type:"timestamp"});
     res.json({unix:unix,utc:utc});
+    
    
   }else if (new Date(userInput) != 'Invalid Date'){
     let date = new Date(userInput)
     let utc = date.toUTCString()
-  let unix = date.getTime()
-  console.log("convert :",value , value.toString())
-  res.json({unix:unix,utc:utc});
+    let unix = date.getTime()
+  
+  // res.json({unix:unix,utc:utc,type:"date"});
+    res.json({unix:unix,utc:utc});
+    
   }else{
-    console.log("ELSE PART")
+    let date = new Date(userInput)
+    let utc = date.toUTCString()
+    let unix = date.getTime()
+  
+  // res.json({unix:unix,utc:utc,type:"date"});
+    res.json({unix:unix,utc:utc});
   }
   
   // let date = ''
