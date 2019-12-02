@@ -24,8 +24,8 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 app.get("/api/timestamp/:date_string?", function (req, res) {
-  let value= req.params.date_string
-  console.log("val :",typeof(value))
+  let value= Number.parseInt(req.params.date_string)
+  console.log("val :",typeof(value),Number.isInteger(value),Number.parseInt(value))
   // let date = ''
   // if (value.search('-') < 0){
   // value= req.params.date_string != undefined ? req.params.date_string : new Date().toISOString().slice(0,10)  
