@@ -45,6 +45,7 @@ app.get("/api/timestamp/:date_string?", function (req, res) {
   // let unix = date.getTime()
   // console.log("convert :",value , value.toString())
   // res.json({unix:unix,utc:utc});
+  res.json({unix:"hello"});
 });
 
 // {"unix":1575203916078,"utc":"Sun, 01 Dec 2019 00:00:00 GMT"}
