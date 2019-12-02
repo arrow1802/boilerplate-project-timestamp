@@ -26,16 +26,29 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/timestamp/:date_string?", function (req, res) {
   let userInput = req.params.date_string
   if (userInput == undefined){
+    
     let value = new Date().toISOString().slice(0,10)
     let date = new Date(value)
     let utc = date.toUTCString()
     let unix = date.getTime()
     res.json({unix:unix,utc:utc});
+    
   }else if (Number.parseInt(userInput) == userInput){
-  let date = new Date(userInput)
-  let value = new Date(userInput * 1)
-  // console.log("Checked value :",userInput,Number.parseInt(userInput) == userInput,Number.isInteger(userInput))
-  console.log("val :",value,Number.isInteger(value))  
+    
+    let value = new Date(userInput * 1).toISOString().slice(0,10)
+    let date = new Date(value)
+    let utc = date.toUTCString()
+    let unix = date.getTime()
+    res.json({unix:unix,utc:utc});
+   
+  }else if (new Date(userInput) != 'Invalid Date'){
+    let date = new Date(userInput)
+    let utc = date.toUTCString()
+  let unix = date.getTime()
+  console.log("convert :",value , value.toString())
+  res.json({unix:unix,utc:utc});
+  }else{
+    console.log("ELSE PART")
   }
   
   // let date = ''
