@@ -24,8 +24,20 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 app.get("/api/timestamp/:date_string?", function (req, res) {
-  let value= Number.parseInt(req.params.date_string)
-  console.log("val :",typeof(value),Number.isInteger(value),Number.parseInt(value))
+  let userInput = req.params.date_string
+  if (userInput == undefined){
+    let value = new Date().toISOString().slice(0,10)
+    let date = new Date(value)
+    let utc = date.toUTCString()
+    let unix = date.getTime()
+    res.json({unix:unix,utc:utc});
+  }else if (Number.parseInt(userInput) == userInput){
+  let date = new Date(userInput)
+  let value = new Date(userInput * 1)
+  // console.log("Checked value :",userInput,Number.parseInt(userInput) == userInput,Number.isInteger(userInput))
+  console.log("val :",value,Number.isInteger(value))  
+  }
+  
   // let date = ''
   // if (value.search('-') < 0){
   // value= req.params.date_string != undefined ? req.params.date_string : new Date().toISOString().slice(0,10)  
@@ -45,7 +57,7 @@ app.get("/api/timestamp/:date_string?", function (req, res) {
   // let unix = date.getTime()
   // console.log("convert :",value , value.toString())
   // res.json({unix:unix,utc:utc});
-  res.json({unix:"hello"});
+  // res.json({unix:"hello"});
 });
 
 // {"unix":1575203916078,"utc":"Sun, 01 Dec 2019 00:00:00 GMT"}
